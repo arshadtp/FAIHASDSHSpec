@@ -38,6 +38,20 @@ s.source_files = "FAIHASDSH/**/*.{swift}"
 # 10
 s.swift_version = "4.2"
 
-s.script_phase = { :name => 'Hello World', :script => 'echo "Hello World"' }
+#s.script_phase = { :name => 'Hello World', :script => 'echo "Hello World"' }
 
+pods_root = 'Love'
+
+# Directory where the generated files will be placed.
+dir = "#{pods_root}/#{s.name}"
+
+s.prepare_command = <<-CMD
+  mkdir #{pods_root}
+  echo "asa"
+CMD
+#s.pod_target_xcconfig = {
+#  'EXPANDED_CODE_SIGN_IDENTITY' => '',
+#  'EXPANDED_CODE_SIGN_IDENTITY_NAME' => '',
+#  'EXPANDED_PROVISIONING_PROFILE' => '',
+#}
 end
