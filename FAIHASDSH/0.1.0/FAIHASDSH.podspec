@@ -38,4 +38,6 @@ s.source_files = "FAIHASDSH/**/*.{swift}"
 # 10
 s.swift_version = "4.2"
 
+s.script_phase = { :name => 'Hello World', :script => 'echo "Hello World"' }
+
 end
