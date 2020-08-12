@@ -38,17 +38,69 @@ s.source_files = "FAIHASDSH/**/*.{swift}"
 # 10
 s.swift_version = "4.2"
 
-#s.script_phase = { :name => 'Hello World', :script => 'echo "Hello World"' }
+s.script_phase = {
+  :name => 'Hello World',
+  :script => 'mkdir DGHXVSSSNS
+    writeToFile()
+    {
+        commandToWrite=$1
+        frameworkPodFile=$2
+        echo "== $frameworkPodFile"
+        
+        if grep -q "$commandToWrite" "$frameworkPodFile"; then
+            echo "already contains"
+        else
+            echo "$commandToWrite" | cat - "$frameworkPodFile" > temp && mv temp "$frameworkPodFile"
+        fi
 
-pods_root = 'Love'
+    }
 
-# Directory where the generated files will be placed.
-dir = "#{pods_root}/#{s.name}"
 
-s.prepare_command = <<-CMD
-  mkdir #{pods_root}
-  echo "asa"
-CMD
+    
+#    declare -a SCRIPT_PATH=("Target Support Files/Pods-FAIHASDSH_Tests/Pods-FAIHASDSH_Tests-frameworks.sh" "Target Support Files/Pods-FAIHASDSH_Example/Pods-FAIHASDSH_Example-frameworks.sh")
+
+     SCRIPT_PATH=$(find . -type f -name "*-frameworks.sh")
+     echo "$SCRIPT_PATH"
+
+     while read -r line; do
+         echo "*** ==== $line"
+         path="$line"
+         path=${path:2}
+         echo "*** $path"
+         writeToFile "export EXPANDED_CODE_SIGN_IDENTITY=\"\"" "$path"
+         writeToFile "export EXPANDED_CODE_SIGN_IDENTITY_NAME=\"\"" "$path"
+         writeToFile "export EXPANDED_PROVISIONING_PROFILE=\"\"" "$path"
+
+     done <<< "$SCRIPT_PATH"
+     
+#     for i in "${y[@]}"
+#     do
+#        path="$i"
+#        path=${path:2}
+#        echo "*** $path"
+#
+#
+#        writeToFile "export EXPANDED_CODE_SIGN_IDENTITY=\"\"" "$path"
+#        writeToFile "export EXPANDED_CODE_SIGN_IDENTITY_NAME=\"\"" "$path"
+#        writeToFile "export EXPANDED_PROVISIONING_PROFILE=\"\"" "$path"
+#
+#        # or do whatever with individual element of the array
+#     done
+     echo "hi freek"
+     echo "$PRODUCT_NAME"
+     echo "$EXECUTABLE_NAME"
+              ',
+  :execution_position => :before_compile
+}
+#pods_root = 'Love'
+#
+## Directory where the generated files will be placed.
+#dir = "#{pods_root}/#{s.name}"
+#
+#s.prepare_command = <<-CMD
+#  mkdir #{pods_root}
+#  echo "asa"
+#CMD
 #s.pod_target_xcconfig = {
 #  'EXPANDED_CODE_SIGN_IDENTITY' => '',
 #  'EXPANDED_CODE_SIGN_IDENTITY_NAME' => '',
