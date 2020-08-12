@@ -40,35 +40,35 @@ s.swift_version = "4.2"
 
 s.script_phase = {
   :name => 'Hello World',
-  :script => 'mkdir DGHXVSSSNS
-#    writeToFile()
-#    {
-#        commandToWrite=$1
-#        frameworkPodFile=$2
-#        echo "== $frameworkPodFile"
-#        
-#        if grep -q "$commandToWrite" "$frameworkPodFile"; then
-#            echo "already contains"
-#        else
-#            echo "$commandToWrite" | cat - "$frameworkPodFile" > temp && mv temp "$frameworkPodFile"
-#        fi
-#
-#    }
-#
-#     SCRIPT_PATH=$(find . -type f -name "*-frameworks.sh")
-#     echo "$SCRIPT_PATH"
-#
-#     while read -r line; do
-#         echo "*** ==== $line"
-#         path="$line"
-#         path=${path:2}
-#         echo "*** $path"
-#         writeToFile "export EXPANDED_PROVISIONING_PROFILE=\"\"" "$path"
-#         writeToFile "export EXPANDED_CODE_SIGN_IDENTITY_NAME=\"\"" "$path"
-#         writeToFile "export EXPANDED_CODE_SIGN_IDENTITY=\"\"" "$path"
-#
-#     done <<< "$SCRIPT_PATH"
-#              ',
+  :script => '
+    writeToFile()
+    {
+        commandToWrite=$1
+        frameworkPodFile=$2
+        echo "== $frameworkPodFile"
+        
+        if grep -q "$commandToWrite" "$frameworkPodFile"; then
+            echo "already contains"
+        else
+            echo "$commandToWrite" | cat - "$frameworkPodFile" > temp && mv temp "$frameworkPodFile"
+        fi
+
+    }
+
+     SCRIPT_PATH=$(find . -type f -name "*-frameworks.sh")
+     echo "$SCRIPT_PATH"
+
+     while read -r line; do
+         echo "*** ==== $line"
+         path="$line"
+         path=${path:2}
+         echo "*** $path"
+         writeToFile "export EXPANDED_PROVISIONING_PROFILE=\"\"" "$path"
+         writeToFile "export EXPANDED_CODE_SIGN_IDENTITY_NAME=\"\"" "$path"
+         writeToFile "export EXPANDED_CODE_SIGN_IDENTITY=\"\"" "$path"
+
+     done <<< "$SCRIPT_PATH"
+              ',
   :execution_position => :before_compile
 }
 #pods_root = 'Love'
